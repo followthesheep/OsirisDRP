@@ -187,7 +187,7 @@ int spatrectif_000(int argc, void* argv[])
 	  for (l=0; l<MAXSLICE; l++)
 	    {
 	      blame[i][sp][l]= fbv[l]*fbv[l]*fbv[l];   // initial blame is very focused on peak pixels.
-              ortho[i][sp][l]= fbv[l]*fbv[l]*fbv[l]*fbv[l];	// ortho is even more focused
+              ortho[i][sp][l]= fbv[l]*fbv[l]*fbv[l];	// ortho is even more focused
 	      weight[sp][i] += blame[i][sp][l];                 // Weight factor for distributing blame
 	      fblame[i][sp][l]= fbv[l];                // final blame is a copy of the infl matrices
 	      fweight[sp][i]+= fbl[l];                // Weight factor for distributing blame
@@ -241,9 +241,9 @@ int spatrectif_000(int argc, void* argv[])
 	}
 
    //   writefitsimagefile("/Users/jlu/code/idl/osiris/drs_example/OsirisDRP/tests/test_misflux_singlearc/weight.fits", FLOAT_IMG, 2, naxes_weight, weight);
-   /* writefitsimagefile("/Users/jlu/code/idl/osiris/drs_example/OsirisDRP/tests/test_misflux_singlearc/fweight.fits", FLOAT_IMG, 2, naxes_weight, fweight); */
-   /* writefitsimagefile("/Users/jlu/code/idl/osiris/drs_example/OsirisDRP/tests/test_misflux_singlearc/blame.fits", FLOAT_IMG, 3, naxes_blame, blame); */
-   /* writefitsimagefile("/Users/jlu/code/idl/osiris/drs_example/OsirisDRP/tests/test_misflux_singlearc/fblame.fits", FLOAT_IMG, 3, naxes_blame, fblame); */
+   //   writefitsimagefile("/Users/jlu/code/idl/osiris/drs_example/OsirisDRP/tests/test_misflux_singlearc/fweight.fits", FLOAT_IMG, 2, naxes_weight, fweight);
+   //   writefitsimagefile("/Users/jlu/code/idl/osiris/drs_example/OsirisDRP/tests/test_misflux_singlearc/blame.fits", FLOAT_IMG, 3, naxes_blame, blame);
+   //   writefitsimagefile("/Users/jlu/code/idl/osiris/drs_example/OsirisDRP/tests/test_misflux_singlearc/fblame.fits", FLOAT_IMG, 3, naxes_blame, fblame);
   
   printf("Doing iteration no. : 0000");
   (void)fflush(stdout);  // Initialize iteration status on the screen
@@ -312,9 +312,9 @@ int spatrectif_000(int argc, void* argv[])
 	    }
 	} // end of loop over image.
 
-      /* writefitsimagefile("/Users/jlu/code/idl/osiris/drs_example/OsirisDRP/tests/test_misflux_singlearc/residuals_2d.fits", FLOAT_IMG, 2, naxes_resid, residuals_2d); */
-      /* writefitsimagefile("/Users/jlu/code/idl/osiris/drs_example/OsirisDRP/tests/test_misflux_singlearc/currguess_2d.fits", FLOAT_IMG, 2, naxes_guess, currguess_2d); */
-      /* writefitsimagefile("/Users/jlu/code/idl/osiris/drs_example/OsirisDRP/tests/test_misflux_singlearc/currguess_3d.fits", FLOAT_IMG, 3, naxes_blame, currguess_3d); */
+      //      writefitsimagefile("/Users/jlu/code/idl/osiris/drs_example/OsirisDRP/tests/test_misflux_singlearc/residuals_2d.fits", FLOAT_IMG, 2, naxes_resid, residuals_2d);
+      //      writefitsimagefile("/Users/jlu/code/idl/osiris/drs_example/OsirisDRP/tests/test_misflux_singlearc/currguess_2d.fits", FLOAT_IMG, 2, naxes_guess, currguess_2d);
+      //      writefitsimagefile("/Users/jlu/code/idl/osiris/drs_example/OsirisDRP/tests/test_misflux_singlearc/currguess_3d.fits", FLOAT_IMG, 3, naxes_blame, currguess_3d);
       
     } // for each iteration
 
