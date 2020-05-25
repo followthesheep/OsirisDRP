@@ -195,7 +195,7 @@ def trace_sky(skyfile='raw/s160902_a009004.fits',ycenter=1089,slicewidth=8,
         plt.clf()
         plt.subplot(3,1,1)
         time1 = time.time()
-        plt.imshow(newslice,interpolation='nearest',origin='lower',vmin=0,vmax=3)
+        plt.imshow(newslice,interpolation='nearest',origin='lower',vmin=0,vmax=3,cmap='inferno')
         plt.xlim(500,600)
 
         slicerange=[300,1825]
@@ -241,6 +241,7 @@ def trace_sky(skyfile='raw/s160902_a009004.fits',ycenter=1089,slicewidth=8,
         #plt.ylabel('Relative Y location (pix)')
         plt.legend(loc=3)
         plt.ylim(6,10)
+        plt.ylabel('Y Centroid (pix)')
         # save the locations in a file
         output = open('white_light_trace.txt','w')
         for i in xrange(len(xlocation)):

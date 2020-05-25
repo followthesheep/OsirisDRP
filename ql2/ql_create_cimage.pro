@@ -35,7 +35,7 @@ fits_info, filename, n_ext=n_ext, /silent
 
 h = headfits(filename)
 instrume = strcompress(sxpar(h,'INSTRUME',count=count),/remove_all) ;; HACK IN GMOS SUPPORT - MDP
-if count eq 1 then if instrume eq 'GMOS-N' then extension=1
+if count eq 1 then if (instrume eq 'GMOS-N') or (instrume eq 'NIFS') then extension = 1
 
 if arg_present(extension) then begin
     ; check to make sure this extension exists
@@ -51,10 +51,10 @@ endelse
 imdata=ql_readfits(filename, hd, EXTEN_NO=extension)
 imsize=size(imdata)
 
-if count eq 1 then if instrume eq 'GMOS-N' then begin
+if count eq 1 then if (instrume eq 'GMOS-N') or (instrume eq 'NIFS') then begin
 	; re-read in the FITS header, inheriting from the PDU header, as is the
 	; GMOS convention.
-	fits_read, filename, exten=extension, temp, hd, /PDU
+	fits_read, filename, exten=extension, temp, hd1, /PDU
 	sxaddpar, hd, "COADDS", 1 ; no coadds keyword present by default...
 endif
 
@@ -81,7 +81,8 @@ if (imdata[0] eq -1 and n_elements(imdata) eq 1) then begin
 endif else begin
        ; makes pointers to the data and header
 	data_ptr=ptr_new(imdata)
-	hd_ptr=ptr_new(hd)
+        hd_ptr = ptr_new(hd)
+
        ; makes a new instance of the 'CImage' class with the 
        ; appropriate parameters
 	im=obj_new('CImage', filename=filename, data=data_ptr, $
