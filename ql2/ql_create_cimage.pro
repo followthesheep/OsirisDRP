@@ -37,6 +37,10 @@ h = headfits(filename)
 instrume = strcompress(sxpar(h,'INSTRUME',count=count),/remove_all) ;; HACK IN GMOS SUPPORT - MDP
 if count eq 1 then if instrume eq 'GMOS-N' then extension=1
 
+;; assume that if there is nothing in the first extension, we should go to the second extension
+naxis = sxpar(h, 'NAXIS')
+if naxis eq 0 then extension = 1
+
 if arg_present(extension) then begin
     ; check to make sure this extension exists
     if (extension gt n_ext) then begin
