@@ -25,6 +25,7 @@
 ;
 ; REVISION HISTORY: 17DEC2002 - MWM: added comments.
 ;2007-06-28 Added mode to check for GMOS data cube format and adjust accordingly. M.D.Perrin
+;2024-05-07 Now compatible with data that is not in the zeroth extension. This is common with other IFU instruments. - Tuan Do. 
 ;- 
 
 function ql_create_cimage, base_id, filename, extension, message=message
@@ -53,7 +54,8 @@ endelse
 
 ; reads in the file and gets its size (dim, xs, ys, zs)
 imdata=ql_readfits(filename, hd, EXTEN_NO=extension)
-imsize=size(imdata)
+imsize = size(imdata)
+
 
 if count eq 1 then if instrume eq 'GMOS-N' then begin
 	; re-read in the FITS header, inheriting from the PDU header, as is the
