@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+# Stand alone script to launch Quicklook IDL program.
+#
+# James Larkin 1/30/98
+# modified for host 'nirspec' by George Brims 2/26/98
+# Completely changed for batch execution instead of
+# RPC communication. 3/1/98.
+# modified to run outside of qlook dir by setting env 
+#    variable -- Jason L. Weiss 02/03/00
+# modified for drp -- JLW 2005/02/19
+# run_odrp accpets a ``-n`` argument to not launch an xterm.
+
+#export OSIRIS_BACKBONE_DIR=$KROOT/rel/default/idl/odrs/backbone
+
+if [ "$1" = "-n" ]; then
+
+    trap - INT
+    idl -IDL_STARTUP ${OSIRIS_BACKBONE_DIR}/drpStartup.pro ${OSIRIS_BACKBONE_DIR}/osiris_drp_backbone_startup.pro
+    trap INT
+
+else 
+
+    #start drp
+    xterm +ls -sb -sl 5000 -T 'OSIRIS DRP' -e idl -IDL_STARTUP ${OSIRIS_BACKBONE_DIR}/drpStartup.pro ${OSIRIS_BACKBONE_DIR}/osiris_drp_backbone_startup.pro
+
+fi
+
